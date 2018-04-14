@@ -40,7 +40,8 @@ class manage
 		$buf .= "\n";
 		$buf .= "--list 			List VMs\n";
 		$buf .= "--create hostname size location image                Create X VMs, local hostname of box, region of droplet, image of droplet\n";
-		$buf .= "--destroy hostname 			Kill VM with hostname\n";
+		$buf .= "--destroy ID 			Kill VM with ID\n";
+		$buf .= "--ssh ID 			SSH into the VM Droplet with ID\n";
 		$buf .= "--help 			Shows this dialogue\n";
 		echo $buf;
 	}
