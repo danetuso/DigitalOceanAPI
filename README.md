@@ -31,3 +31,13 @@ Commands:
 ```php -q vmManage.php --ssh <dropletID>```
 
 ```php -q vmManage.php --create <hostname> <size> <location> <image>```
+
+### List all Locations
+
+`curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" "https://api.digitalocean.com/v2/regions"`
+
+### List all Sizes
+`curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582" "https://api.digitalocean.com/v2/sizes"`
+
+### List all Images
+`curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582' "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1"`
