@@ -10,7 +10,7 @@ For setup,
 
 You must generate a Digital Ocean API Token for your account, as well as add an SSH Key.
 Add both of these to your CONFIG.php file.
-Make sure you have the id_rsa private key file of the RSA SSH key you created in the root directory of this project.
+Make sure you have the id_rsa private key file of the RSA SSH key you created in the root directory of this project or to change it's location in the config.
 
 You can run `php -q vmManage.php --help` for help.
 
