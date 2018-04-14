@@ -12,11 +12,17 @@ You must generate a Digital Ocean API Token for your account, as well as add an 
 Add both of these to your CONFIG.php file.
 Make sure you have the id_rsa private key file of the RSA SSH key you created in the root directory of this project or to change it's location in the config.
 
-You can run `php -q vmManage.php --help` for help.
-
 A typical creation command would look like:
 `php -q vmManage.php --create TestHostname 512mb SFO1 ubuntu=16-04-x64`
 
 The overall process will take between 1 and 5 minutes to spin up and provision the server properly.
 
 To access the server, you can ssh with the key linked in the CONFIG.php file
+
+
+Commands:
+`php -q vmManage.php --help`
+`php -q vmManage.php --list`
+`php -q vmManage.php --destroy <dropletID>`
+`php -q vmManage.php --ssh <dropletID>`
+`php -q vmManage.php --create <hostname> <size> <location> <image>`
