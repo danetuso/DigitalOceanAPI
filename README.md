@@ -4,6 +4,8 @@ A project for handling Digital Ocean droplets on the unix commandline. Using the
 
 In the future, this will be it's own consolidated utility, and versions for provisioning VPN and web servers will be forked. The post provisioning code can easily be removed from the droplet class.
 
+https://www.digitalocean.com/help/api/
+
 For setup,
 
 You must generate a Digital Ocean API Token for your account, as well as add an SSH Key.
