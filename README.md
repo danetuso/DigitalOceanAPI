@@ -21,8 +21,8 @@ To access the server, you can ssh with the key linked in the CONFIG.php file
 
 
 Commands:
-`php -q vmManage.php --help`
-`php -q vmManage.php --list`
-`php -q vmManage.php --destroy <dropletID>`
-`php -q vmManage.php --ssh <dropletID>`
-`php -q vmManage.php --create <hostname> <size> <location> <image>`
+```php -q vmManage.php --help```
+```php -q vmManage.php --list```
+```php -q vmManage.php --destroy <dropletID>```
+```php -q vmManage.php --ssh <dropletID>```
+```php -q vmManage.php --create <hostname> <size> <location> <image>```
