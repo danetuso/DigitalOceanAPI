@@ -10,7 +10,8 @@ ln -s /etc/nginx/sites-available/site.com /etc/nginx/sites-enabled/
 IP=$(curl ipinfo.io/ip)
 sed "8a\server_name ${IP};" /etc/nginx/sites-available/site.com
 systemctl restart nginx
-echo "hello world" >> /var/www/site.com/public_html/index.html
+touch /var/www/site/public_html/index.html
+echo "hello world" >> /var/www/site/public_html/index.html
 
 rm -rf /etc/update-motd.d/99-one-click
 ufw disable
