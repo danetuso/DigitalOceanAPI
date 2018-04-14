@@ -73,6 +73,3 @@ https://www.digitalocean.com/help/api/
         "s-32vcpu-192gb"
       ]
 ```
-
-### List all Images
-`curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer b7d03a6947b217efb6f3ec3bd3504582' "https://api.digitalocean.com/v2/snapshots?page=1&per_page=1"`
