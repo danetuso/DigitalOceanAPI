@@ -15,7 +15,7 @@ class droplet
      * Builds droplet and instantiates API class (kinda)
      *
      * @param string $hostname
-     * @param string $size Typically 512mb
+     * @param string $size Typically s-1vcpu-1gb
      * @param string $location Typically sfo1 or nyc1
      * @param string $image Typically ubuntu-16-04-x64
      *
