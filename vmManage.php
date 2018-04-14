@@ -55,7 +55,7 @@ function main($argv)
 			}
 			else
 			{
-				shell_exec('ssh root@' . $ip . ' -o StrictHostKeyChecking=no -i ./id_rsa');
+				shell_exec('ssh root@' . $ip . ' -o StrictHostKeyChecking=no -i ' . KEY_PATH);
 			}
     	}
     	else

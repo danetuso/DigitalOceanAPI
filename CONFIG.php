@@ -7,4 +7,5 @@ define('API_TOKEN', 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 define('SSH_KEY_ID', array(00000000));
 define('API_URL', 'https://api.digitalocean.com/v2/droplets');
 define('BOOT_TIME', 40);
+define('KEY_PATH', './id_rsa');
 ?>

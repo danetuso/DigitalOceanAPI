@@ -45,8 +45,8 @@ class droplet
 		global $digi;
 		print_r("Step");
 		sleep(BOOT_TIME);
-		exec("scp -o StrictHostKeyChecking=no -i ./id_rsa openvpn-install.sh root@" . $IP . ":/root/");
-		exec('ssh -o StrictHostKeyChecking=no -i ./id_rsa root@' . $IP . ' "bash /root/openvpn-install.sh"');
-		return exec("scp -o StrictHostKeyChecking=no -i ./id_rsa root@" . $IP . ":/root/testClient.ovpn .");
+		exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " openvpn-install.sh root@" . $IP . ":/root/");
+		exec('ssh -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "bash /root/openvpn-install.sh"');
+		return exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " root@" . $IP . ":/root/testClient.ovpn .");
 	}
 }
