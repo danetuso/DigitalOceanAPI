@@ -5,14 +5,9 @@ main($argv);
 
 function main($argv)
 {
-	$arguments = manage::processArguments($argv);
-	//Incorrect Syntax
-	if(empty($arguments)){
-		manage::printHelp();
-		exit;
-	}
+	$arguments = manage::validateArguments($argv);
 	//Assumed correct syntax
-	if(isset($arguments[1]))
+	if(!empty($arguments[1]))
     {
 		$dr = new droplet();
 	    if($arguments[1] == '--create')
@@ -21,75 +16,43 @@ function main($argv)
 	    		$dr->buildDropletData($arguments[2], $arguments[3], $arguments[4], $arguments[5]),
 	    		true
 	    	);
-	    	$newIP = digitalocean::getDropletIPByID($resp['droplet']['id']);
-
-	    	//Prints output of provisioning
-	    	print_r($dr->provisionDroplet($newIP));
+	    	if(!empty($resp['droplet']))
+	    	{
+	    		manage::printMessage(0, "Droplet created successfully.");
+	    		$newIP = digitalocean::getDropletIPByID($resp['droplet']['id']);
+	    		if(!empty($newIP))
+	    		{
+	    			$dr->provisionDroplet($newIP);
+	    			manage::printMessage(0, "IP successfully injected into Ansible hosts file.");
+	    		}
+	    	}
+	    	else
+	    		manage::printMessage(3, "Droplet failed to create! Please check your arguments and config.");
     	}
     	else if($arguments[1] == '--destroy')
-    	{
-    		// TODO:
-    		// add an "are you sure?" flag (quickdelete config addition as well)
-    		print_r(digitalocean::destroyDroplet($arguments[2]));
-    	}
-    	else if($arguments[1] == '--ssh')
+    		digitalocean::destroyDroplet($arguments[2]);
+    	else if($arguments[1] == '--list')
     	{
     		$droplets = digitalocean::listDroplets();
-    		$ip = '';
-			foreach($droplets['droplets'] as $idx){
-				if($arguments[2] == $idx['name'] || $arguments[2] == $idx['id']){
-					$ip = $idx['networks']['v4'][0]['ip_address'];
-				}
-			}
-			if(empty($ip))
+			if(!empty($droplets['droplets']))
 			{
-				//Display SSH help, list droplets
-				echo "Usage: php vmManage.php --ssh <name/id> \n\n";
-				echo "Droplets: \n";
-				foreach($droplets['droplets'] as $idx){
-						$buf = "name: " . $idx['name'] . "\n";
-						$buf .= "ID: " . $idx['id'] . "\n";
-						$buf .= "ip: " . $idx['networks']['v4'][0]['ip_address'] . "\n\n";
+				echo "\033[1;32m      DROPLETS\033[0m\n";
+				echo "     ==========\n";
+				foreach($droplets['droplets'] as $idx)
+				{
+						$buf = "\033[1;34mNAME: \033[0m" . $idx['name'] . "\n";
+						$buf .= "\033[1;34mID:   \033[0m" . $idx['id'] . "\n";
+						$buf .= "\033[1;34mIP:   \033[0m" . $idx['networks']['v4'][0]['ip_address'] . "\n\n";
 						echo $buf;
 				}
 			}
 			else
-			{
-				shell_exec('ssh root@' . $ip . ' -o StrictHostKeyChecking=no -i ' . KEY_PATH);
-			}
+				manage::printMessage(3, "The Droplets could not be received. Please check your config.");
     	}
     	else
-    	{
     		manage::printHelp();
-			exit;
-    	}
     }
     else
-    {
-    	//Was added to first slot in array during argument processing for future additions
-		if($arguments[0] == '--list'){
-			$droplets = digitalocean::listDroplets();
-
-			echo "Droplets: \n";
-			foreach($droplets['droplets'] as $idx){
-					$buf = "name: " . $idx['name'] . "\n";
-					$buf .= "ID: " . $idx['id'] . "\n";
-					$buf .= "ip: " . $idx['networks']['v4'][0]['ip_address'] . "\n\n";
-					echo $buf;
-			}
-    	}
-    	else if($arguments[0] == '--help')
-    	{
-    		manage::printHelp();
-			exit;
-    	}
-    	else
-    	{
-    		//Other
-			manage::printHelp();
-			exit;
-		}
-	}
+		manage::printHelp();
 }
-
 ?>

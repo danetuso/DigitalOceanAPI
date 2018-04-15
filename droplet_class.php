@@ -29,7 +29,7 @@ class droplet
 		$dropletData[1] = $size;
 		$dropletData[2] = $location;
 		$dropletData[3] = $image;
-
+		manage::printMessage(0, "Building Droplet Data");
 		return $this->digi->createDroplet($dropletData);
 	}
 
@@ -43,24 +43,8 @@ class droplet
 	public function provisionDroplet($IP)
 	{
 		global $digi;
+		manage::printMessage(1, "Waiting for Droplet to spin up. (" . BOOT_TIME . " seconds)");
 		sleep(BOOT_TIME);
-		if(DROPLET_TYPE == "WEB")
-		{
-			print_r(exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " mysql_secure.sh root@" . $IP . ":/root/"));
-			print_r(exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " install_script.sh root@" . $IP . ":/root/"));
-			print_r(exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " site.com root@" . $IP . ":/etc/nginx/sites-available/"));
-			print_r(exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " composerinstall.sh root@" . $IP . ":/root/"));
-			//expect command does not work over ssh, switching to ansible soon :D
-			print_r(exec('ssh -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "bash /root/install_script.sh"'));
-			return exec('ssh -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "rm -f /root/*.sh"');
-		}
-		else if(DROPLET_TYPE == "VPN")
-		{
-			exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " openvpn-install.sh root@" . $IP . ":/root/");
-			exec('ssh -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "bash /root/openvpn-install.sh"');
-			return exec("scp -o StrictHostKeyChecking=no -i " . KEY_PATH . " root@" . $IP . ":/root/testClient.ovpn .");
-		}
-		else
-			return null;
+		return exec('echo "' . $IP . '" >> '. ANSIBLE_DIR .'/hosts');
 	}
 }

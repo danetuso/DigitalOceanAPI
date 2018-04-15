@@ -25,7 +25,7 @@ apt-get update && apt-get install -y yarn
 #Install NodeJS
 apt-get install -y nodejs npm
 npm cache clean -f
-npm install -g npm
+npm install -g n
 n stable
 
 iptables --flush
@@ -34,4 +34,4 @@ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -j DROP
 iptables-save > /root/iptables.conf
-sed '$iiptables-restore /root/iptables.conf' /etc/rc.local
+sed -i '$iiptables-restore /root/iptables.conf' /etc/rc.local
