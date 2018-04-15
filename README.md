@@ -1,6 +1,6 @@
 # DigitalOceanAPI
 
-A project for handling Digital Ocean droplets on the unix commandline. Using the create utility currently runs a shell command to provision an ansible hosts file. This can be easily removed from the droplet class.
+A project for handling Digital Ocean droplets on the unix commandline. It can be used to quickly manage droplets from the CLI, as well as be used in combination with provisioning scripts (Ex. Ansible) for one click deployments.
 
 ## SETUP
 
