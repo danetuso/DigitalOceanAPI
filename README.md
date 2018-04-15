@@ -1,8 +1,6 @@
 # DigitalOceanAPI
 
-A project for handling Digital Ocean droplets on the unix commandline. Using the create utility currently provisions the server with an OpenVPN server, and starts it up. It also pulls the client.ovpn configuration to the local machine.
-
-In the future, this will be it's own consolidated utility, and versions for provisioning VPN and web servers will be forked. The post provisioning code can easily be removed from the droplet class.
+A project for handling Digital Ocean droplets on the unix commandline. Using the create utility currently runs a shell command to provision an ansible hosts file. This can be easily removed from the droplet class.
 
 For setup,
 
