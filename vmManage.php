@@ -22,7 +22,7 @@ function main($argv)
 	    		$newIP = digitalocean::getDropletIPByID($resp['droplet']['id']);
 	    		if(!empty($newIP))
 	    		{
-	    			manage::printMessage(0, "Droplet public IPv4 address: ". $newIP);
+	    			manage::printMessage(1, "Droplet public IPv4 address: ". $newIP);
 	    		}
 	    	}
 	    	else
