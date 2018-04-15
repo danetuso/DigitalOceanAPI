@@ -2,21 +2,23 @@
 
 A project for handling Digital Ocean droplets on the unix commandline. Using the create utility currently runs a shell command to provision an ansible hosts file. This can be easily removed from the droplet class.
 
-For setup,
+## SETUP
+
+Dependencies: `php7.0 php-curl`
 
 You must generate a Digital Ocean API Token for your account, as well as add an SSH Key.
 Add both of these to your CONFIG.php file.
 Make sure you have the id_rsa private key file of the RSA SSH key you created in the root directory of this project or to change it's location in the config.
 
 A typical creation command would look like:
-`php -q vmManage.php --create TestHostname s-1vcpu-1gb SFO1 ubuntu-16-04-x64`
+`php -q vmManage.php --create TestHostname s-1vcpu-1gb sfo1 ubuntu-16-04-x64`
 
-The overall process will take between 1 and 5 minutes to spin up and provision the server properly.
+The overall process will take between 30 and 50 seconds to spin up the server depending on the image specified.
 
 To access the server, you can ssh with the key linked in the CONFIG.php file
 
 
-Commands:
+## COMMANDS 
 
 ```php -q vmManage.php --help```
 
