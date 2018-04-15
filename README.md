@@ -13,7 +13,7 @@ Make sure you have the id_rsa private key file of the RSA SSH key you created in
 A typical creation command would look like:
 `php -q vmManage.php --create TestHostname s-1vcpu-1gb SFO1 ubuntu-16-04-x64`
 
-The overall process will take between 1 and 5 minutes to spin up and provision the server properly.
+The overall process will take between 30 and 50 seconds to spin up the server depending on the image specified.
 
 To access the server, you can ssh with the key linked in the CONFIG.php file
 
