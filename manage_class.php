@@ -16,16 +16,50 @@ class manage
 		if (count($argv) == 0 || !isset($argv[1]))
 			return $arguments; //empty or !set
 
-		//TODO: 
-		//Pull declared array of accepted arguments and foreach check against that
-		//if false, set $arguments = array(); and return it
 		foreach ($argv as $idx => $arg)
 			$arguments[$idx] = $arg;
 
+		$size = false;
+		$region = false;
+		$valid = false;
 		if ($arguments[1] == '--create')
 		{
-			if(!empty($arguments[5]))
-				return $arguments;
+			//size
+			foreach (SIZES as $s)
+			{
+				if($arguments[3] == $s)
+					$size = true;
+			}
+			//region
+			foreach (REGIONS as $r)
+			{
+				if($arguments[4] == $r)
+					$region = true;
+			}
+			if(!$region)
+			{
+				manage::printMessage(3, "Syntax Error, please provide a proper droplet region. See https://github.com/danetuso/DigitalOceanAPI for a list.");
+				exit;
+			}
+			if(!$size)
+			{
+				manage::printMessage(3, "Syntax Error, please provide a proper droplet size. See https://github.com/danetuso/DigitalOceanAPI for a list.");
+				exit;
+			}
+			return $arguments;
+		}
+		else
+		{
+			foreach (VALID_ARGUMENTS as $v)
+			{
+				if($arguments[1] == "--" . $v)
+				{
+					$valid = true;
+					return $arguments;
+				}
+			}
+			if(!$valid)
+				return null;
 		}
 		return $arguments;
 	}

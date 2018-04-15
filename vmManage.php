@@ -40,10 +40,10 @@ function main($argv)
 				echo "     ==========\n";
 				foreach($droplets['droplets'] as $idx)
 				{
-						$buf = "\033[1;34mNAME: \033[0m" . $idx['name'] . "\n";
-						$buf .= "\033[1;34mID:   \033[0m" . $idx['id'] . "\n";
-						$buf .= "\033[1;34mIP:   \033[0m" . $idx['networks']['v4'][0]['ip_address'] . "\n\n";
-						echo $buf;
+					$buf = "\033[1;34mNAME: \033[0m" . $idx['name'] . "\n";
+					$buf .= "\033[1;34mID:   \033[0m" . $idx['id'] . "\n";
+					$buf .= "\033[1;34mIP:   \033[0m" . $idx['networks']['v4'][0]['ip_address'] . "\n\n";
+					echo $buf;
 				}
 			}
 			else
