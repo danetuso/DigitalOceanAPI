@@ -24,9 +24,7 @@ Commands:
 
 ```php -q vmManage.php --list```
 
-```php -q vmManage.php --destroy <dropletID>```
-
-```php -q vmManage.php --ssh <dropletID>```
+```php -q vmManage.php --destroy <dropletID/dropletName>```
 
 ```php -q vmManage.php --create <hostname> <size> <location> <image>```
 
