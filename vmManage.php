@@ -22,8 +22,7 @@ function main($argv)
 	    		$newIP = digitalocean::getDropletIPByID($resp['droplet']['id']);
 	    		if(!empty($newIP))
 	    		{
-	    			$dr->provisionDroplet($newIP);
-	    			manage::printMessage(0, "IP successfully injected into Ansible hosts file.");
+	    			manage::printMessage(0, "Droplet public IPv4 address: ". $newIP);
 	    		}
 	    	}
 	    	else

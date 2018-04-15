@@ -32,19 +32,4 @@ class droplet
 		manage::printMessage(0, "Building Droplet Data");
 		return $this->digi->createDroplet($dropletData);
 	}
-
-	/**
-     * Called after spinup, moves install file and runs it, pulls back config upon completion.
-     *
-     * @param string $IP
-     *
-     * @return Response of last scp transfer of .ovpn client file
-     */
-	public function provisionDroplet($IP)
-	{
-		global $digi;
-		manage::printMessage(1, "Waiting for Droplet to spin up. (" . BOOT_TIME . " seconds)");
-		sleep(BOOT_TIME);
-		return exec('echo "' . $IP . '" >> '. ANSIBLE_DIR .'/hosts');
-	}
 }
