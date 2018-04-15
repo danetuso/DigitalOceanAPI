@@ -11,6 +11,6 @@ define('SIZES', array("s-1vcpu-1gb","s-1vcpu-2gb","s-1vcpu-3gb","s-2vcpu-2gb","s
 //Change These
 define('API_TOKEN', '');
 define('SSH_KEY_ID', array());
-define('KEY_PATH', './id_rsa');
+define('KEY_PATH', './res/id_rsa');
 define('ANSIBLE_DIR', './Ansible');
 ?>
