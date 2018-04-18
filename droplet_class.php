@@ -1,6 +1,6 @@
 <?php
-
-include_once './includes.php';
+$root = dirname( __FILE__ );
+include_once $root . '/includes.php';
 
 class droplet
 {
@@ -31,5 +31,21 @@ class droplet
 		$dropletData[3] = $image;
 		manage::printMessage(0, "Building Droplet Data");
 		return $this->digi->createDroplet($dropletData);
+	}
+
+	/**
+     * Called after spinup, moves install file and runs it, pulls back config upon completion.
+     *
+     * @param string $IP
+     *
+     * @return Response of last scp transfer of .ovpn client file
+     */
+	public function provisionDroplet($IP)
+	{
+		global $digi;
+		manage::printMessage(1, "Waiting for Droplet to spin up. (" . BOOT_TIME . " seconds)");
+		sleep(BOOT_TIME);
+		exec('ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "apt-get install python -y"');
+		return exec('echo "' . $IP . '" >> '. ANSIBLE_DIR .'/hosts');
 	}
 }

@@ -1,5 +1,6 @@
 <?php
-include_once './includes.php';
+$root = dirname( __FILE__ );
+include_once $root . '/includes.php';
 
 class digitalocean
 {
