@@ -92,24 +92,33 @@ class manage
 	{
 		if(DEBUG_MODE || $level == 3)
 		{
-			$buf = "";
-			switch($level)
+			if(JSON_OUTPUT && $level == 3)
 			{
-				case 0:
-					$buf .= "\033[1;32m[OKAY] \033[0m";
-					break;
-				case 1:
-					$buf .= "\033[1;34m[INFO] \033[0m";
-					break;
-				case 2:
-					$buf .= "\033[1;33m[WARN] \033[0m";
-					break;
-				case 3:
-					$buf .= "\033[1;31m[CRIT] \033[0m";
-					break;
+				$out = array("error" => $output);
+
+				echo json_encode($out);
 			}
-			$buf .= $output . "\n";
-			echo $buf;
+			else
+			{
+				$buf = "";
+				switch($level)
+				{
+					case 0:
+						$buf .= "\033[1;32m[OKAY] \033[0m";
+						break;
+					case 1:
+						$buf .= "\033[1;34m[INFO] \033[0m";
+						break;
+					case 2:
+						$buf .= "\033[1;33m[WARN] \033[0m";
+						break;
+					case 3:
+						$buf .= "\033[1;31m[CRIT] \033[0m";
+						break;
+				}
+				$buf .= $output . "\n";
+				echo $buf;
+			}
 		}
 	}
 }

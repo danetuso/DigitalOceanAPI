@@ -98,7 +98,7 @@ class digitalocean
      */
 	public static function destroyDroplet($dropletID)
 	{
-		if(is_string($dropletID))
+		if(!preg_match('/^[1-9][0-9]*$/', $dropletID))
 		{
 			$dropletID = digitalocean::getDropletIDByName($dropletID);
 			if(empty($dropletID))
@@ -117,8 +117,18 @@ class digitalocean
 		));
 		
 		$resp = curl_exec($curl);
+		$info = curl_getinfo($curl);
+		if($info['http_code'] == 204)
+		{
+			if(JSON_OUTPUT)
+    			echo json_encode(array("success" => $dropletID));
+		}
+		else
+		{
+			if(JSON_OUTPUT)
+    			echo json_encode(array("fail" => $dropletID));
+		}
 		curl_close($curl);
-		//TODO Response error check
 		manage::printMessage(0, "Droplet successfully destroyed!");
 		return json_decode($resp, true);
 	}

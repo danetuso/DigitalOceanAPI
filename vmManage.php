@@ -23,15 +23,22 @@ function main($argv)
 	    		$newIP = digitalocean::getDropletIPByID($resp['droplet']['id']);
 	    		if(!empty($newIP))
 	    		{
-	    			$dr->provisionDroplet($newIP);
-	    			manage::printMessage(0, "IP successfully injected into Ansible hosts file.");
+	    			if(PROVISION)
+	    			{
+	    				$dr->provisionDroplet($newIP);
+	    				manage::printMessage(0, "IP successfully injected into Ansible hosts file.");
+	    			}
+    				if(JSON_OUTPUT)
+    					echo json_encode(array("ip" => $newIP));
+    				else
+    					echo $newIP;	
 	    		}
 	    	}
 	    	else
 	    		manage::printMessage(3, "Droplet failed to create! Please check your arguments and config.");
     	}
     	else if($arguments[1] == '--destroy')
-    		digitalocean::destroyDroplet($arguments[2]);
+    		$destroy = digitalocean::destroyDroplet($arguments[2]);
     	else if($arguments[1] == '--list')
     	{
     		$droplets = digitalocean::listDroplets();

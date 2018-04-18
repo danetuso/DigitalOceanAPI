@@ -45,7 +45,7 @@ class droplet
 		global $digi;
 		manage::printMessage(1, "Waiting for Droplet to spin up. (" . BOOT_TIME . " seconds)");
 		sleep(BOOT_TIME);
-		exec('ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "apt-get install python -y"');
+		exec('ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ' . KEY_PATH . ' root@' . $IP . ' "apt-get install python -y" > /dev/null');
 		return exec('echo "' . $IP . '" >> '. ANSIBLE_DIR .'/hosts');
 	}
 }

@@ -10,7 +10,11 @@ ini_set('max_execution_time', 0);
 define('DEBUG_MODE', TRUE);
 
 #Toggle json format outputs, friendly for other things reading from stdout
+#DEBUG MODE MUST BE SET TO FALSE
 define('JSON_OUTPUT', FALSE);
+
+#Toggle optional provisioning function to run after droplet is spun up
+define('PROVISION', FALSE);
 
 #Digital Ocean API URL
 define('API_URL', 'https://api.digitalocean.com/v2/droplets');
@@ -26,6 +30,6 @@ define('SIZES', array("s-1vcpu-1gb","s-1vcpu-2gb","s-1vcpu-3gb","s-2vcpu-2gb","s
 //CHANGE THESE
 define('API_TOKEN', '');
 define('SSH_KEY_ID', array());
-define('KEY_PATH', './res/id_rsa');
-define('ANSIBLE_DIR', './Ansible');
+define('KEY_PATH', $root . '/res/id_rsa');
+define('ANSIBLE_DIR', $root . '/Ansible');
 ?>
